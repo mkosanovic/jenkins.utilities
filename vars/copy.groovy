@@ -18,27 +18,21 @@ def call(Map parameters = [:]){
 	}
 	else if(fromDir && toDir && filter)
 	{
-		antFunction(toDir,fromDir,filter,flatten)
+		println "Not implemented"
+		// antFunction(toDir,fromDir,filter,flatten)
 	}
 	else{
 		echo "Incorrect input arguments"
 	}
 }
 
-def antFunction(String toDir, String fromDir, String filter, boolean flatten){
+def antFunction(String toDir, String fromDir, String filter, boolean flatten){	
 	def ant =new AntBuilder()
 
-	// ant.copy(toDir:toDir,overwrite:true,flatten:flatten, verbose:true){		
-	// 	fileset(dir:fromDir){
-	// 		include(name:filter)
-	// 		exclude(name:"**/.git/**/*.*")
-	// 	}
-	// }
-
-	def t = ant.copy(toDir:toDir,overwrite:true,flatten:flatten, verbose:true)
-	t.fileset(dir:fromDir)
-	{
-		include(name:filter)
-		exclude(name:"**/.git/**/*.*")
+	ant.copy(toDir:toDir,overwrite:true,flatten:flatten, verbose:true){		
+		fileset(dir:fromDir){
+			include(name:filter)
+			exclude(name:"**/.git/**/*.*")
+		}
 	}
 }
