@@ -6,6 +6,7 @@ def call(Map parameters = [:]){
 	def fromDir = parameters.fromDir
 	def toDir = parameters.toDir
 	def flatten = parameters.flatten ? parameters.flatten : true // true by default
+	def filter = parameters.filter
 
 	if(file && toFile)
 	{
@@ -15,7 +16,7 @@ def call(Map parameters = [:]){
 	{
 		ant.copy(file:file, toDir:toFile,overwrite:true,flatten:flatten, verbose:true)
 	}
-	else if(fromDir && toDir)
+	else if(fromDir && toDir && filter)
 	{
 		antFunction(toDir,fromDir,filter,flatten)
 	}
@@ -26,7 +27,7 @@ def call(Map parameters = [:]){
 
 def antFunction(String toDir, String fromDir, String filter, boolean flatten){
 	def ant =new AntBuilder()
-	
+
 	ant.copy(toDir:toDir,overwrite:true,flatten:flatten, verbose:true){
 		fileset(dir:fromDir){
 			include(name:filter)
