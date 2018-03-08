@@ -25,6 +25,8 @@ def call(Map parameters = [:]){
 }
 
 def antFunction(String toDir, String fromDir, String filter, boolean flatten){
+	def ant =new AntBuilder()
+	
 	ant.copy(toDir:toDir,overwrite:true,flatten:flatten, verbose:true){
 		fileset(dir:fromDir){
 			include(name:filter)
