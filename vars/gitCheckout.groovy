@@ -29,7 +29,7 @@ def call(String repo, String relativeTargetDir, String credentials, String branc
             branches: [[name: branch]],
             doGenerateSubmoduleConfigurations: false, 
             submoduleCfg: [], 
-            userRemoteConfigs:[[credentialsId: credentials, refspec: refspec, url: repo]
+            userRemoteConfigs:[[credentialsId: credentials, refspec: refspec, url: repo]]
         ]
 	}	
 }
