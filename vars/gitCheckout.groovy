@@ -1,4 +1,4 @@
-def call(String repo, String relativeTargetDir, String credentials, String branch= '*/master',  String refspec=refspec){
+def call(String repo, String relativeTargetDir, String credentials, String branch= '*/master',  String refspec='+refs/heads/master:refs/remotes/origin/master'){
 	credentials = credentials?.trim();
 	credentials = credentials ? credentials : "$env.GIT_CREDENTIALS";
 
