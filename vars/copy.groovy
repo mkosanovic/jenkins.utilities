@@ -17,10 +17,12 @@ def call(Map parameters = [:]){
 	}
 	else if(fromDir && toDir)
 	{
-		ant.copy(toDir:toDir,overwrite:true,flatten:flatten, verbose:true){
-			fileset(dir:fromDir){
-				include(name:filter)
-				exclude(name:"**/.git/**/*.*")
+		script{
+			ant.copy(toDir:toDir,overwrite:true,flatten:flatten, verbose:true){
+				fileset(dir:fromDir){
+					include(name:filter)
+					exclude(name:"**/.git/**/*.*")
+				}
 			}
 		}
 	}
