@@ -24,7 +24,7 @@ def call(Map parameters = [:]){
 
 	def repo = parameters.repo
 
-	if(parameters.contains("relativeTargetDir"))	
+	if(parameters.containsKey("relativeTargetDir"))	
 	{
 		def relativeTargetDir = parameters.relativeTargetDir
 
