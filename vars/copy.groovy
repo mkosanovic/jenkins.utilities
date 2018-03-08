@@ -14,7 +14,7 @@ def call(Map parameters = [:]){
 	}
 	else if(file && toDir)
 	{
-		ant.copy(file:file, toDir:toFile,overwrite:true,flatten:flatten, verbose:true)
+		ant.copy(file:file, toDir:toDir,overwrite:true,flatten:flatten, verbose:true)
 	}
 	else if(fromDir && toDir && filter)
 	{
