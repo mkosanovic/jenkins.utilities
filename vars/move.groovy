@@ -12,11 +12,11 @@ def call(Map parameters = [:]){
 	try{
 		if(file && toFile)
 		{
-			ant.move(file:file, toFile:toFile,verbose:true)
+			ant.move(file:file, toFile:toFile,failonerror:failOnException,verbose:true)
 		}
 		else if(file && toDir)
 		{
-			ant.move(file:file, toDir:toDir,flatten:flatten, verbose:true)
+			ant.move(file:file, toDir:toDir,flatten:flatten, failonerror:failOnException, verbose:true)
 		}
 		else if(fromDir && toDir && filter)
 		{
