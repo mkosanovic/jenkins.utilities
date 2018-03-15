@@ -4,6 +4,7 @@ def call(Map parameters = [:]){
 	def credentials = parameters.containsKey("credentials") ? parameters.credentials : "$env.GIT_CREDENTIALS"
 	def refspec = "+refs/heads/master:refs/remotes/origin/master"
 	def branch = "*/master"
+	def checkoutLatest = parameters.latest ? parameters.latest : false
 
 	if(!credentials?.trim()){
 		// throw new IllegalArgumentException("credentials")​
@@ -21,6 +22,15 @@ def call(Map parameters = [:]){
 		branch = parameters.branch
 	}
 
+	if(checkoutLatest){
+		checkout changelog:true, poll:true, scm:[
+			$class:'GitSCM',
+			branches: [[name: "*/tags/v*"]],
+			doGenerateSubmoduleConfigurations: false, 
+			submoduleCfg: [], 
+			userRemoteConfigs:[[credentialsId: "$env.GIT_CREDENTIALS", refspec: "+refs/tags/v*:refs/remotes/tags/v*", url: repo]]
+		]
+	}
 
 	def repo = parameters.repo
 
