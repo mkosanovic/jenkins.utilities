@@ -31,6 +31,8 @@ def call(Map parameters = [:]){
 			submoduleCfg: [], 
 			userRemoteConfigs:[[credentialsId: "$env.GIT_CREDENTIALS", refspec: "+refs/tags/v*:refs/remotes/tags/v*", url: repo]]
 		]
+
+		return
 	}
 
 	if(parameters.containsKey("relativeTargetDir"))	
