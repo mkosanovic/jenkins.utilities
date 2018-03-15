@@ -8,11 +8,11 @@ def call(Map parameters = [:]){
 	def repo = parameters.repo
 
 	if(!credentials?.trim()){
-		throw new IllegalArgumentException("credentials")​
+		throw new IllegalArgumentException("credentials")
 	}	
 
 	if(!repo){
-		throw new IllegalArgumentException("repo")​
+		throw new IllegalArgumentException("repo")
 	}
 
 	if(parameters.containsKey("refspec")){
