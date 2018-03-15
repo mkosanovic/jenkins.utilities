@@ -5,13 +5,14 @@ def call(Map parameters = [:]){
 	def refspec = "+refs/heads/master:refs/remotes/origin/master"
 	def branch = "*/master"
 	def checkoutLatest = parameters.latest ? parameters.latest : false
+	def repo = parameters.repo
 
 	if(!credentials?.trim()){
-		// throw new IllegalArgumentException("credentials")​
+		throw new IllegalArgumentException("credentials")​
 	}	
 
-	if(!parameters.containsKey("repo")){
-		// throw new IllegalArgumentException("repo")​
+	if(!repo){
+		throw new IllegalArgumentException("repo")​
 	}
 
 	if(parameters.containsKey("refspec")){
@@ -31,8 +32,6 @@ def call(Map parameters = [:]){
 			userRemoteConfigs:[[credentialsId: "$env.GIT_CREDENTIALS", refspec: "+refs/tags/v*:refs/remotes/tags/v*", url: repo]]
 		]
 	}
-
-	def repo = parameters.repo
 
 	if(parameters.containsKey("relativeTargetDir"))	
 	{
