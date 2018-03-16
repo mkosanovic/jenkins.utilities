@@ -21,7 +21,7 @@ def call(Map parameters = [:]){
 		refspec = parameters.refspec
 	}
 
-	if(parameters.containsKey("branch")){
+	if(parameters.branch){
 		branch = parameters.branch
 	}
 
