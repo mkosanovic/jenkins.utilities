@@ -2,9 +2,11 @@ def call(Map parameters = [:]){
 	// String repo, String relativeTargetDir, String credentials, String branch= '*/master',  String refspec='+refs/heads/master:refs/remotes/origin/master'){
 
 	def credentials = parameters.containsKey("credentials") ? parameters.credentials : "$env.GIT_CREDENTIALS"
-	def refspec = "+refs/heads/master:refs/remotes/origin/master"
-	def branch = "*/master"
-	def checkoutLatest = parameters.latest ? parameters.latest : false
+	def refspec = "+refs/tags/v*:refs/remotes/tags/v*"
+	def branch = "*/tags/v*"
+	// def refspec = "+refs/heads/master:refs/remotes/origin/master"
+	// def branch = "*/master"
+	// def checkoutLatest = parameters.latest ? parameters.latest : false	
 	def repo = parameters.repo
 
 	if(!credentials?.trim()){
@@ -23,17 +25,17 @@ def call(Map parameters = [:]){
 		branch = parameters.branch
 	}
 
-	if(checkoutLatest){
-		checkout changelog:true, poll:true, scm:[
-			$class:'GitSCM',
-			branches: [[name: "*/tags/v*"]],
-			doGenerateSubmoduleConfigurations: false, 
-			submoduleCfg: [], 
-			userRemoteConfigs:[[credentialsId: "$env.GIT_CREDENTIALS", refspec: "+refs/tags/v*:refs/remotes/tags/v*", url: repo]]
-		]
+	// if(checkoutLatest){
+	// 	checkout changelog:true, poll:true, scm:[
+	// 		$class:'GitSCM',
+	// 		branches: [[name: "*/tags/v*"]],
+	// 		doGenerateSubmoduleConfigurations: false, 
+	// 		submoduleCfg: [], 
+	// 		userRemoteConfigs:[[credentialsId: "$env.GIT_CREDENTIALS", refspec: "+refs/tags/v*:refs/remotes/tags/v*", url: repo]]
+	// 	]
 
-		return
-	}
+	// 	return
+	// }
 
 	if(parameters.containsKey("relativeTargetDir"))	
 	{
