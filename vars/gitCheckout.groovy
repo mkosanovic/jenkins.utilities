@@ -23,7 +23,7 @@ def call(Map parameters = [:]){
 	}
 
 	if(parameters.branch){				
-		if(verbose){ println "Setting branch parameter to ${parameters.branch}" }
+		if(verbose){ echo "Setting branch parameter to ${parameters.branch}" }
 
 		branch = parameters.branch		
 	}
@@ -42,7 +42,7 @@ def call(Map parameters = [:]){
 
 	if(parameters.containsKey("relativeTargetDir"))	
 	{
-		if(verbose) println "Using relativeDirectory ${parameters.relativeTargetDir}"
+		if(verbose) echo "Using relativeDirectory ${parameters.relativeTargetDir}"
 		def relativeTargetDir = parameters.relativeTargetDir
 
         checkout changelog:true, poll:true, scm:[
