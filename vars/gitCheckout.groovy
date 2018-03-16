@@ -4,6 +4,7 @@ def call(Map parameters = [:]){
 	def credentials = parameters.containsKey("credentials") ? parameters.credentials : "$env.GIT_CREDENTIALS"
 	def refspec = "+refs/tags/v*:refs/remotes/tags/v*"
 	def branch = "*/tags/v*"
+	def verbose = parameters.verbose ? parameters.verbose: false
 	// def refspec = "+refs/heads/master:refs/remotes/origin/master"
 	// def branch = "*/master"
 	// def checkoutLatest = parameters.latest ? parameters.latest : false	
@@ -21,8 +22,10 @@ def call(Map parameters = [:]){
 		refspec = parameters.refspec
 	}
 
-	if(parameters.branch){
-		branch = parameters.branch
+	if(parameters.branch){				
+		if(verbose){ println "Setting branch parameter to ${parameters.branch}" }
+
+		branch = parameters.branch		
 	}
 
 	// if(checkoutLatest){
@@ -39,6 +42,7 @@ def call(Map parameters = [:]){
 
 	if(parameters.containsKey("relativeTargetDir"))	
 	{
+		if(verbose) println "Using relativeDirectory ${parameters.relativeTargetDir}"
 		def relativeTargetDir = parameters.relativeTargetDir
 
         checkout changelog:true, poll:true, scm:[
