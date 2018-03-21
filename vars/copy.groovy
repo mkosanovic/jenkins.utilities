@@ -26,8 +26,8 @@ def call(Map parameters = [:]){
 		else{
 			echo "Incorrect input arguments"
 		}
-	}catch(e){
-		echo e
+	}catch(Exception e){
+		e.printStackTrace()
 
 		if(failOnException){ throw e; }
 	}
