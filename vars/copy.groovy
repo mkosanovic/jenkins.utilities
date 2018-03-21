@@ -7,12 +7,7 @@ def call(Map parameters = [:]){
 	def toDir = parameters.toDir
 	def flatten = parameters.flatten ? parameters.flatten : true // true by default
 	def filter = parameters.filter
-
-	println parameters.failOnException
-
-	def failOnException = parameters.failOnException && "${parameters.failOnException}".toBoolean() ? parameters.failOnException : true
-
-	println failOnException
+	def failOnException = parameters.containsKey("failOnException") ? parameters.failOnException : true
 
 	try{
 		if(file && toFile)
@@ -34,7 +29,7 @@ def call(Map parameters = [:]){
 	}catch(Exception e){
 		println e.getMessage()
 
-		if(failOnException){ println "Throwing exception"; throw e; }
+		if(failOnException){ throw e; }
 	}
 }
 
