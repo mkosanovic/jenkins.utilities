@@ -29,7 +29,7 @@ def call(Map parameters = [:]){
 	}catch(Exception e){
 		e.printStackTrace()
 
-		if(failOnException){ throw e; }
+		if(failOnException){ println "Throwing exception"; throw e; }
 	}
 }
 
