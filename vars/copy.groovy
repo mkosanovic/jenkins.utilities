@@ -7,22 +7,29 @@ def call(Map parameters = [:]){
 	def toDir = parameters.toDir
 	def flatten = parameters.flatten ? parameters.flatten : true // true by default
 	def filter = parameters.filter
+	def failOnException = parameters.failOnException ? parameters.failOnException : true
 
-	if(file && toFile)
-	{
-		ant.copy(file:file, toFile:toFile,overwrite:true,flatten:flatten, verbose:true)
-	}
-	else if(file && toDir)
-	{
-		ant.copy(file:file, toDir:toDir,overwrite:true,flatten:flatten, verbose:true)
-	}
-	else if(fromDir && toDir && filter)
-	{
-		println "Not implemented"
-		// antFunction(toDir,fromDir,filter,flatten)
-	}
-	else{
-		echo "Incorrect input arguments"
+	try{
+		if(file && toFile)
+		{
+			ant.copy(file:file, toFile:toFile,overwrite:true,flatten:flatten, verbose:true)
+		}
+		else if(file && toDir)
+		{
+			ant.copy(file:file, toDir:toDir,overwrite:true,flatten:flatten, verbose:true)
+		}
+		else if(fromDir && toDir && filter)
+		{
+			println "Not implemented"
+			// antFunction(toDir,fromDir,filter,flatten)
+		}
+		else{
+			echo "Incorrect input arguments"
+		}
+	}catch(e){
+		echo e
+
+		if(failOnException){ throw e; }
 	}
 }
 
