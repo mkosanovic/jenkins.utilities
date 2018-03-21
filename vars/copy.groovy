@@ -7,7 +7,12 @@ def call(Map parameters = [:]){
 	def toDir = parameters.toDir
 	def flatten = parameters.flatten ? parameters.flatten : true // true by default
 	def filter = parameters.filter
-	def failOnException = parameters.failOnException ? parameters.failOnException : true
+
+	println parameters.failOnException
+
+	def failOnException = parameters.failOnException && "${parameters.failOnException}".toBoolean() ? parameters.failOnException : true
+
+	println failOnException
 
 	try{
 		if(file && toFile)
@@ -27,7 +32,7 @@ def call(Map parameters = [:]){
 			echo "Incorrect input arguments"
 		}
 	}catch(Exception e){
-		e.printStackTrace()
+		println e.getMessage()
 
 		if(failOnException){ println "Throwing exception"; throw e; }
 	}
