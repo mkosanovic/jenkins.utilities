@@ -2,10 +2,10 @@ def call(Map parameters = [:]){
     if(!parameters.containsKey("task")){
         throw new IllegalArgumentException("Missing argument [task]")
     }
-    if(parameters.containsKey("project")){
+    if(!parameters.containsKey("project")){
         throw new IllegalArgumentException("Missing argument [project]")
     }
-    if(parameters.task.equals("deploy") || !parameters.containsKey("file")){
+    if(parameters.task.equals("deploy") && !parameters.containsKey("file")){
         throw new IllegalArgumentException("Missing argument [file] for task [deploy]")
     }
 
@@ -15,5 +15,6 @@ def call(Map parameters = [:]){
  
     echo "${env.PROFILE}"
 
+    resolvePath(target:"portlets")
     // bat "\"${tool ant}\\bin\\ant.bat\" ${task} -Dproject-name=${project} ${file}"
 }
