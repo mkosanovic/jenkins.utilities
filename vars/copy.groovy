@@ -1,6 +1,6 @@
 def call(Map parameters = [:]){
 	def ant = new AntBuilder()
-	
+
 	// redirect ant output
 	ant.project.getBuildListeners().each{   
 		it.setOutputPrintStream(System.out)
@@ -17,7 +17,7 @@ def call(Map parameters = [:]){
 	try{
 		if(file && toFile)
 		{
-			ant.copy(file:file, toFile:toFile,overwrite:true,flatten:flatten, verbose:true)
+			println(ant.copy(file:file, toFile:toFile,overwrite:true,flatten:flatten, verbose:true))
 		}
 		else if(file && toDir)
 		{
