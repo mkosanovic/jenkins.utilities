@@ -1,5 +1,10 @@
 def call(Map parameters = [:]){
 	def ant = new AntBuilder()
+	
+	// redirect ant output
+	ant.project.getBuildListeners().each{   
+		it.setOutputPrintStream(System.out)
+	}
 
 	def file = parameters.file
 	def toFile = parameters.toFile
@@ -24,7 +29,7 @@ def call(Map parameters = [:]){
 			// antFunction(toDir,fromDir,filter,flatten)
 		}
 		else{
-			echo "Incorrect input arguments"
+			println "Incorrect input arguments"
 		}
 	}catch(Exception e){
 		println e.getMessage()
