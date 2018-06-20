@@ -2,7 +2,7 @@ def call(Map parameters = [:]){
 	def ant = new AntBuilder()
 
 	def baos = new ByteArrayOutputStream()
-	def printStream = new PrintWriter(baos)
+	def printStream = new PrintStream(baos)
 
 	// redirect std out and error output
 	// System.out = baos
