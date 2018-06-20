@@ -1,9 +1,15 @@
 def call(Map parameters = [:]){
 	def ant = new AntBuilder()
 
+	def baos = new ByteArrayOutputStream()
+
+	// redirect std out and error output
+	// System.out = baos
+	// System.err = baos
+
 	// redirect ant output
 	ant.project.getBuildListeners().each{   
-		it.setOutputPrintStream(System.out)
+		it.setOutputPrintStream(baos)
 	}
 
 	def file = parameters.file
@@ -17,7 +23,7 @@ def call(Map parameters = [:]){
 	try{
 		if(file && toFile)
 		{
-			println(ant.copy(file:file, toFile:toFile,overwrite:true,flatten:flatten, verbose:true))
+			ant.copy(file:file, toFile:toFile,overwrite:true,flatten:flatten, verbose:true)
 		}
 		else if(file && toDir)
 		{
@@ -35,6 +41,9 @@ def call(Map parameters = [:]){
 		println e.getMessage()
 
 		if(failOnException){ throw e; }
+	}
+	finally{
+		println baos.toString("UTF_8")
 	}
 }
 
