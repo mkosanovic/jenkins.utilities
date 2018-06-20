@@ -47,7 +47,7 @@ def call(Map parameters = [:]){
 		if(failOnException){ throw e; }
 	}
 	finally{
-		println baos.toString("UTF_8")
+		println baos.toString()
 	}
 }
 
