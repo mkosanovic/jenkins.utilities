@@ -10,7 +10,7 @@ def call(Map parameters = [:]){
 
 	// redirect ant output
 	ant.project.getBuildListeners().each{   
-		it.setOutputPrintStream(System.out)
+		it.setOutputPrintStream(printStream)
 		// it.setOutputStream(baos)
 	}
 
