@@ -1,19 +1,37 @@
 def call(Map parameters = [:]){
 	def ant = new AntBuilder()
+	def baos = new ByteArrayOutputStream()
+	def printStream = new PrintStream(baos)
 
+	// redirect ant output
+	ant.project.getBuildListeners().each{   
+		it.setOutputPrintStream(printStream)
+	}
+	
 	def file = parameters.file
 	def dir = parameters.dir
 	def quiet = parameters.quiet ? parameters.quiet : true
 
-	if(file)
-	{
-		ant.delete(file:file, quiet:quiet, verbose:true)
+	try{
+		if(file)
+		{
+			ant.delete(file:file, quiet:quiet, verbose:true)
+		}
+		else if(dir)
+		{
+			ant.delete(dir:dir, quiet:quiet,verbose:true)
+		}
+		else{
+			echo "Incorrect input arguments"
+		}
 	}
-	else if(dir)
-	{
-		ant.delete(dir:dir, quiet:quiet,verbose:true)
+	catch(Exception e){
+		println e.getMessage()
+
+		if(failOnException){ throw e; }
 	}
-	else{
-		echo "Incorrect input arguments"
+	finally{
+		println baos.toString()
+		printStream.close();
 	}
 }

@@ -12,25 +12,10 @@ def call(Map parameters = [:]){
 
     switch(target){
         case "portlets":
-            echo "hello"
             return profile.equals("cges-dev") ? env.CGES_LIFERAY_HOME : env.ESO_LIFERAY_HOME
         case "services":
-            // return profile.equals("") ? $env.
+            return profile.equals("cges-dev") ? env.CGES_SERVICE_CATALINA_HOME : env.ESO_SERVICE_CATALINA_HOME
         case "services-url":
-            break;
-    }
-
-    // switch(profile){
-    //     case "cges-dev":
-    //         break;
-    //     case "eso-dev":
-
-    //         break;
-    //     default:
-    //         throw new IllegalArgumentException("Non existing profile ${profile}")
-    // }
-
-    if(target.equals("webapp")){
-
+            return profile.equals("cges-dev") ? env.CGES_SERVICES_URL : env.ESO_SERVICES_URL
     }
 }

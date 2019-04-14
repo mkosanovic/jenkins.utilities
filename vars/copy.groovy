@@ -1,17 +1,11 @@
 def call(Map parameters = [:]){
 	def ant = new AntBuilder()
-
 	def baos = new ByteArrayOutputStream()
 	def printStream = new PrintStream(baos)
-
-	// redirect std out and error output
-	// System.out = baos
-	// System.err = baos
 
 	// redirect ant output
 	ant.project.getBuildListeners().each{   
 		it.setOutputPrintStream(printStream)
-		// it.setOutputStream(baos)
 	}
 
 	def file = parameters.file
@@ -37,17 +31,16 @@ def call(Map parameters = [:]){
 			// antFunction(toDir,fromDir,filter,flatten)
 		}
 		else{
-			println "Incorrect input arguments"
+			echo "Incorrect input arguments"
 		}
-
-		printStream.close();
 	}catch(Exception e){
 		println e.getMessage()
 
 		if(failOnException){ throw e; }
 	}
-	finally{
+	finally{		
 		println baos.toString()
+		printStream.close();		
 	}
 }
 
